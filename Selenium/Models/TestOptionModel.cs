@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Selenium.Model
+namespace Selenium.Models
 {
     public class TestOptionModel
     {
-        public int TestId { get; set; }
-        public string Name { get; set; }
+        public long Id { get; set; }
+        public string OptionName { get; set; }
+        public string Description { get; set; }
     }
 }

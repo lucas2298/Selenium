@@ -1,4 +1,4 @@
-﻿using Selenium.Core;
+﻿using WindowViewBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Selenium
+namespace Selenium.Views
 {
     /// <summary>
-    /// Interaction logic for TestOptionWindow.xaml
+    /// Interaction logic for TestOptionView.xaml
     /// </summary>
-    public partial class TestOptionWindow : WindowBase
+    public partial class TestOptionView : WindowViewFunctionBase
     {
-        public TestOptionWindow()
+        public TestOptionView()
         {
             InitializeComponent();
         }
-        public void RunTest()
+        public void TestOption_Click(object sender, RoutedEventArgs e)
         {
+
         }
     }
 }

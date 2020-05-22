@@ -1,4 +1,19 @@
-{
-  "TestId": [1, 2, 3],
-  "Name": [ "Openlinkinfile", "Openlinkinbrowser", "Openlinkforeachproject" ]
+﻿{
+  "Option": [
+    {
+      "Id": 1,
+      "OptionName": "Mở các trang có trong tập tin .txt",
+      "Description": "Lựa chọn này sẽ đi kiểm tra tất cả những trang mà bạn đã nhập vào một tập tin có đuôi là .txt"
+    },
+    {
+      "Id": 2,
+      "OptionName": "Mở tất cả các trang nằm ở Menu trái",
+      "Description": "Lựa chọn này sẽ đi kiểm tra tất cả những trang được cho phép xuất hiện ở Menu trái"
+    },
+    {
+      "Id": 3,
+      "OptionName": "Mở các trang có trong một dự án",
+      "Description": "Lựa chọn này sẽ đi kiểm tra tất cả những trang mà một dự án có, những trang này sẽ hiện thị thông tin về dự án đó"
+    }
+  ]
 }
