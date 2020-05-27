@@ -11,6 +11,7 @@ namespace Selenium.ViewModels
     public class TestOptionViewModel
     {
         public BindableCollection<TestOptionModel> TestOption { get; set; }
+        public TestOptionModel OptionSelected { get; set; }
         public TestOptionViewModel()
         {
             var JsonString = File.ReadAllText(@"D:\Selenium\Selenium\TestOption\Category.json");
@@ -21,6 +22,7 @@ namespace Selenium.ViewModels
                 Id = dataRow.Field<long>("Id"),
                 OptionName = dataRow.Field<string>("OptionName"),
                 Description = dataRow.Field<string>("Description"),
+                SaveName = dataRow.Field<string>("SaveName")
             }).ToList();
             TestOption = new BindableCollection<TestOptionModel>(TestOptionSelect);
         }

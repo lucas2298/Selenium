@@ -1,0 +1,9 @@
+{
+  "IsText": false,
+  "IsTextArea": true,
+  "IsTextAreaFull": false,
+  "IsOnlyNumber": true,
+  "IsOnlyNormalChar": false,
+  "IsOnlySpecialChar": true,
+  "IsAllChar": false
+}

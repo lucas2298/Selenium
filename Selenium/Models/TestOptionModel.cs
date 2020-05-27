@@ -11,5 +11,6 @@ namespace Selenium.Models
         public long Id { get; set; }
         public string OptionName { get; set; }
         public string Description { get; set; }
+        public string SaveName { get; set; }
     }
 }

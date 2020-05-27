@@ -5,28 +5,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" FontSize="20"
+        mc:Ignorable="d" FontSize="16"
         Title="TestOptionView" Height="800" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <TextBlock Text="Kiểm tra" Margin="10,10,695,717"></TextBlock>
-        <ComboBox ItemsSource="{Binding TestOption}" Margin="102,10,10,717">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding OptionName}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button Content="Kiểm tra" Click="TestOption_Click" Width="100px" Height="50px"></Button>
-            <Button Content="Lưu mẫu kiểm tra" Height="50px" Margin="5"/>
-            <Button Content="Dùng mẫu kiểm tra cũ" Width="100px" Height="50px"></Button>
+        <StackPanel Margin="5,5,5,0">
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                <TextBlock Text="Kiểm tra"/>
+                <ComboBox Name="ComboBox_TestOption" ItemsSource="{Binding TestOption}" SelectedItem="{Binding OptionSelected}" Margin="5 0 0 0" HorizontalAlignment="Stretch" Width="500">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding OptionName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Name="StackPanel_OptionDescription" Margin="0,5,0,0" HorizontalAlignment="Stretch" DataContext="{Binding ElementName=ComboBox_TestOption, Path=SelectedItem}">
+                <TextBlock Text="Mô tả"/>
+                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+            </StackPanel>
+            <StackPanel Name="StackPanel_SelectOptions">
+                <TextBlock Text="Chọn những phần muốn mở thêm trên màn hình"></TextBlock>
+                <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                    <CheckBox Content="Mở tất cả các Tab" IsChecked="{Binding Path=IsOpenTab}"></CheckBox>
+                    <CheckBox Content="Mở tất cả các Expander" Margin="5 0 0 0" IsChecked="{Binding Path=IsOpenExpander}"></CheckBox>
+                </StackPanel>
+                <TextBlock Text="Có tạo mới dữ liệu không?"></TextBlock>
+                <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                    <CheckBox Content="Yes" IsChecked="{Binding Path=IsCreateNew}"></CheckBox>
+                </StackPanel>
+                <TextBlock Text="Chọn những kiểu dữ liệu muốn sửa"></TextBlock>
+                <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                    <CheckBox Content="text" IsChecked="{Binding Path=IsText}"></CheckBox>
+                    <CheckBox Content="textarea" Margin="5 0 0 0" IsChecked="{Binding Path=IsTextArea}"></CheckBox>
+                    <CheckBox Content="textareafull" Margin="5 0 0 0" IsChecked="{Binding Path=IsTextAreaFull}"></CheckBox>
+                </StackPanel>
+                <TextBlock Text="Chọn dữ liệu nhập vào kiểm tra"></TextBlock>
+                <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                    <CheckBox Content="Chỉ chứ số" IsChecked="{Binding Path=IsOnlyNumber}"></CheckBox>
+                    <CheckBox Content="Chỉ chứa chữ" Margin="5 0 0 0" IsChecked="{Binding Path=IsOnlyNormalChar}"></CheckBox>
+                    <CheckBox Content="Chỉ chứa ký tự đặc biệt" Margin="5 0 0 0" IsChecked="{Binding Path=IsOnlySpecialChar}"></CheckBox>
+                    <CheckBox Content="Chứa tất cả" Margin="5 0 0 0" IsChecked="{Binding Path=IsAllChar}"></CheckBox>
+                </StackPanel>
+                <Button Content="Bỏ chọn tất cả" Click="UnSelectAll_Click" Width="114" Margin="0 5 0 0" HorizontalAlignment="Left"></Button>
+            </StackPanel>
         </StackPanel>
-
+        <StackPanel Margin="5" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Content="Kiểm tra" Click="TestOption_Click" Width="100px" Height="50px"/>
+            <Button Content="Lưu mẫu kiểm tra" Click="SaveSelectTestOption_Click" Margin="5 0 0 0" Height="50px" Width="173"/>
+            <Button Content="Dùng mẫu cũ" Click="UploadFileJsonToSelectTest_Click" Margin="5 0 0 0" Width="134" Height="50px"/>
+        </StackPanel>
     </Grid>
 </windowviewbase:WindowViewFunctionBase>

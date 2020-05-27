@@ -21,7 +21,7 @@ namespace WindowViewBase
                 Thread.Sleep(1500);
             }
         }
-        public void Login(ChromeDriver chrome, string Name, string Pass)
+        public string Login(ChromeDriver chrome, string Name, string Pass, string ScreenShotPath)
         {
             // Tìm đối tượng
             // 1. UserName
@@ -35,6 +35,7 @@ namespace WindowViewBase
             Password.SendKeys(Pass);
             SignIn.Click();
             Thread.Sleep(5000);
+            return VerifyError(chrome, ScreenShotPath);
         }
         // Check error
         public string VerifyError(ChromeDriver chrome, string ScreenShotPath)
@@ -42,11 +43,11 @@ namespace WindowViewBase
             string Result = "";
             try
             {
-                var temp = chrome.FindElementById("error_api");
-                if (temp.Text != "")
+                var TextError = chrome.FindElementById("error_api").GetAttribute("innerHTML");
+                if (TextError != "")
                 {
                     string ScreenShotName = DateTime.Now.ToString("yyyyMMddHHmmss");
-                    Result = "Error_API: " + temp.Text + "\nScreenShot saved as: " + ScreenShotName + "\n";
+                    Result = "Error_API: " + TextError + "\nScreenShot saved as: " + ScreenShotName + "\n";
                     TakeScreenShot(chrome, ScreenShotName, "Error", ScreenShotPath);
                 }
             }
@@ -55,11 +56,11 @@ namespace WindowViewBase
             }
             try
             {
-                var temp = chrome.FindElementById("error_ui");
-                if (temp.Text != "")
+                var TextError = chrome.FindElementById("error_ui").GetAttribute("innerHTML");
+                if (TextError != "")
                 {
                     string ScreenShotName = DateTime.Now.ToString("yyyyMMddHHmmss");
-                    Result = "Error_UI: " + temp.Text + "\nScreenShot saved as: " + ScreenShotName + "\n";
+                    Result = "Error_UI: " + TextError + "\nScreenShot saved as: " + ScreenShotName + "\n";
                     TakeScreenShot(chrome, ScreenShotName, "Error", ScreenShotPath);
                 }
             }
@@ -95,16 +96,16 @@ namespace WindowViewBase
             var TabLevel = 5;
             return BackTracking(chrome, 1, TabLevel, ScreenShotPath);
         }
-        // Open explainer
-        public string OpenExplainer(ChromeDriver chrome, string ScreenShotPath)
+        // Open Expander
+        public string OpenExpander(ChromeDriver chrome, string ScreenShotPath)
         {
             string Result = "";
             try
             {
-                var ExplainerList = chrome.FindElementsByClassName("btn-outline-link");
+                var ExpanderList = chrome.FindElementsByClassName("btn-outline-link");
                 long MaxHeight = chrome.Manage().Window.Size.Height - 500;
                 long temp = MaxHeight;
-                foreach (var sItem in ExplainerList)
+                foreach (var sItem in ExpanderList)
                 {
                     IJavaScriptExecutor js = (IJavaScriptExecutor)chrome;
                     if (sItem.Location.Y >= MaxHeight)
@@ -125,7 +126,7 @@ namespace WindowViewBase
             }
             return Result;
         }
-        public string ChangeServerApi(ChromeDriver chrome, string UserName, string Password, string Server)
+        public string ChangeServerApi(ChromeDriver chrome, string UserName, string Password, string Server, string ScreenShotPath)
         {
             string Result = "";
             if (Server == "Local")
@@ -137,7 +138,7 @@ namespace WindowViewBase
                 chrome.Navigate().GoToUrl("http://soliddevapp.allianceitsc.com/#/login/up");
                 chrome.Navigate().Refresh();
                 Thread.Sleep(5000);
-                Login(chrome, UserName, Password);
+                Login(chrome, UserName, Password, ScreenShotPath);
                 Result = "Server run on localhost\n";
             }
             else
@@ -193,8 +194,8 @@ namespace WindowViewBase
             var temp = OpenAllTabInPage(chrome, ScreenShotPath);
             if (temp == "") Result += VerifyError(chrome, ScreenShotPath);
             else Result += temp;
-            // Open all explainer in this page
-            Result += OpenExplainer(chrome, ScreenShotPath);
+            // Open all Expander in this page
+            Result += OpenExpander(chrome, ScreenShotPath);
             // Check insert, delete and edit
             Result += CheckInsertDelete(chrome, ScreenShotPath);
             return Result;

@@ -76,8 +76,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Base\WindowViewBase.cs" />
+    <Compile Include="Base\WindowViewFunctionBase.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Function\OpenLinkInFile.cs" />
+    <Compile Include="Function\OpenLinkInMenu.cs" />
+    <Compile Include="Models\SelectTestModel.cs" />
     <Compile Include="Models\TestOptionModel.cs" />
     <Compile Include="ViewModels\TestOptionViewModel.cs" />
     <Compile Include="Views\TestOptionView.xaml.cs">
@@ -118,12 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SeleniumCore\SeleniumCore.csproj">
-      <Project>{FA46A951-9CD1-4E5C-BB1B-76173AC0AD79}</Project>
-      <Name>SeleniumCore</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
